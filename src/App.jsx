@@ -55,7 +55,7 @@ export default function App() {
 
       {/* display images */}
       <div className="text-center items-center justify-center m-auto">
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 sm:gap-4 md:grid-cols-4 md:gap-4">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-4 md:gap-4">
           {nfts.filter((a) => a).map((nft, index) => (
             <div className="card card-compact border-2 border-blue-700 w-45 sm:w-80 bg-base-100 shadow-xl relative group">
               <img src={nft.img} alt={nft.img} key={nft.img}/>
