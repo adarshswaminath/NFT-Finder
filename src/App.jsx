@@ -9,15 +9,20 @@ import Navbar from "./Navbar"
 import Alert from "./Alert"
 
 export default function App() {
+  // State for store address  
   const [address, setAddress] = useState('');
+  // State for count NFT
   const [nftCountMessage, setNftCount] = useState('');
+  // State for Store nft detils 
   const [nfts, setNfts] = useState([]);
+  // State for error message
   const [error,setError] = useState()
 
 
   async function nftFinder() {
-    const alchemy = new Alchemy({
-      apiKey: "",
+    try{
+      const alchemy = new Alchemy({
+      apiKey: "fZ8olf1fyDNNov-M6ufz4fZwMgnIGZ7i",
       network: Network.ETH_MAINNET
     });
 
@@ -25,17 +30,23 @@ export default function App() {
       const nftData = await alchemy.nft.getNftsForOwner(address);
       setNftCount(`Total NFT #${nftData.totalCount}`);
       for await (const nft of alchemy.nft.getNftsForOwnerIterator(address)) {
-        const img = nft.media[0].thumbnail;
-        const floorPrice = nft.contract.openSea.floorPrice;
-        const name = nft.contract.name;
-        const RequestStatus = nft.contract.openSea.safelistRequestStatus;
-        console.log(RequestStatus)
-        setNfts(prevNfts => [...prevNfts, { img, floorPrice, name,RequestStatus }]);
+        const img = nft.media[0].thumbnail; // Image
+        const floorPrice = nft.contract.openSea.floorPrice; // floor price
+        const name = nft.contract.name; // NFT name 
+        const RequestStatus = nft.contract.openSea.safelistRequestStatus; // NFT safe request status
+        setNfts(prevNfts => [...prevNfts, { img, floorPrice, name,RequestStatus }]); // push State which store NFT detils
       }
     } 
     else {
       setError("Empty Space Not acceptable")
     }
+      // Error message 
+      } catch(err) {
+        setError("Something Went Wrong Try again ....")
+        setTimeout(()=>{
+          window.location.reload(false)
+        },2000)
+      }
   }
   return (
     <div className="App">
@@ -56,6 +67,7 @@ export default function App() {
       {/* display images */}
       <div className="text-center items-center justify-center m-auto">
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-4 md:gap-4">
+          // Fetch data from the State Which Store NFT detils
           {nfts.filter((a) => a).map((nft, index) => (
             <div className="card card-compact border-2 border-blue-700 w-45 sm:w-80 bg-base-100 shadow-xl relative group">
               <img src={nft.img} alt={nft.img} key={nft.img}/>
