@@ -42,10 +42,7 @@ export default function App() {
     }
       // Error message 
       } catch(err) {
-        setError("Something Went Wrong Try again ....")
-        setTimeout(()=>{
-          window.location.reload(false)
-        },2000)
+        setError("Something Went Wrong Reload The Page And Try again ....")
       }
   }
   return (
