@@ -22,7 +22,7 @@ export default function App() {
   async function nftFinder() {
     try{
       const alchemy = new Alchemy({
-      apiKey: "fZ8olf1fyDNNov-M6ufz4fZwMgnIGZ7i",
+      apiKey: ALCHEMY_API_KEY,
       network: Network.ETH_MAINNET
     });
 
