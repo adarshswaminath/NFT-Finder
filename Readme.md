@@ -4,7 +4,7 @@
 ## Technology Stack & Tools
 - JavaScript (Writing Script)
 - TailwindCSS (Front-end)
-- Alchemy-SDk (Node provider)
+- Alchemy (Node provider)
 
 
 
